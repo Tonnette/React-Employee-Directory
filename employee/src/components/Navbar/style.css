@@ -1,0 +1,16 @@
+.bigText {
+  text-align: center;
+  font-size: 80px;
+  font-weight: 500;
+  color: white;
+  background-color: #32055e;
+}
+
+.smallText {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 200;
+  color: white;
+  background-color: #32055e;
+  padding-bottom: 25px;;
+}
