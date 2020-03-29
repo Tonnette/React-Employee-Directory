@@ -14,52 +14,28 @@ class Search extends Component {
   };
 
   // When this component mounts, search for the movie "The Matrix"
+
   componentDidMount() {
-    this.searchMovies("The Matrix");
+    API.getRandom()
+      .then(res => this.setState({ result: res.data.results[0] }))
+      .catch(err => console.log(err));
   }
 
-  searchMovies = query => {
-    API.search(query)
-      .then(res => this.setState({ result: res.data }))
-      .catch(err => console.log(err));
-  };
-
   handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ search: event.target.value });
   };
 
   // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchMovies(this.state.search);
-  };
+//   handleFormSubmit = event => {
+//     event.preventDefault();
+//     this.searchMovies(this.state.search);
+//   };
 
   render() {
     return (
       <Container>
         <Row>
-          <Col size="md-8">
-            <Card
-              heading={this.state.result.Title || "Search for a Movie to Begin"}
-            >
-              {this.state.result.Title ? (
-                <MovieDetail
-                  title={this.state.result.Title}
-                  src={this.state.result.Poster}
-                  director={this.state.result.Director}
-                  genre={this.state.result.Genre}
-                  released={this.state.result.Released}
-                />
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
-            </Card>
-          </Col>
-          <Col size="md-4">
+        <Col size="md-12">
             <Card heading="Search">
               <SearchForm
                 value={this.state.search}
@@ -68,6 +44,26 @@ class Search extends Component {
               />
             </Card>
           </Col>
+          <Col size="md-12">
+            <Card
+              heading={ "Employee Table"}
+            >
+              {this.state.result ? (
+                <MovieDetail
+                  title={this.state.result.gender}
+                //   src={this.state.result.Poster}
+                  email={this.state.result.email}
+                  phone={this.state.result.phone}
+                  country={this.state.result.nat}
+                />
+              ) :
+              (
+                <h3>No Results to Display</h3>
+              )
+              }
+            </Card>
+          </Col>
+        
         </Row>
       </Container>
     );

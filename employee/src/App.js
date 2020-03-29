@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
-import OmdbContainer from "./components/OmdbContainer";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <div>
         <Navbar />
         <Wrapper>
-          <Route exact path="/" component={OmdbContainer} />
+          <Route exact path="/" component={Search} />
         </Wrapper>
         <Footer />
       </div>
