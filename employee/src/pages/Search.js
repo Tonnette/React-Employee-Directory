@@ -54,7 +54,7 @@ class Search extends Component {
                     </Col>
                     <Col size="md-12">
                         <div>
-                            <h1>Employee Table</h1>
+                
                             {console.log(items)}
                             <table>
                                 <tr>
