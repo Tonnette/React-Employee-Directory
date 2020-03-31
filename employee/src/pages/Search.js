@@ -41,7 +41,7 @@ class Search extends Component {
         API.getRandom(this.state.search)
             .then(res => {
                 if (res.data.status === "error") {
-                    throw new Error(res.data.message);
+                    throw new Error("error");
                 }
                 this.setState({ items: res.data.results, error: "" });
             })
@@ -63,9 +63,9 @@ class Search extends Component {
                             <SearchForm
                                 handleFormSubmit={this.handleFormSubmit}
                                 handleInputChange={this.handleInputChange}
-                                items={this.state.items}
+                                items={items}
                             />
-                        {/* <SearchResults items={this.state.results} /> */}
+                        <SearchResults items={items} />
                             
                    
 
@@ -103,39 +103,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-// {items.length > 0 ? (
-
-//     <EmployeeDetail
-
-//     // title={items[0].gender}
-//     // src={items[0].picture.medium}
-
-//     // name={items[0].name.first + " " + items[0].name.last}
-//     // email={items[0].email}
-//     // phone={items[0].phone}
-//     // country={items[0].nat}
-//     />
-// ) :
-//     (
-//         <h3>No Results to Display</h3>
-//     )
-
-// }
-
-            // {/* {items.map(item => (
-            //                 // <img src={item.picture.medium} alt={item.name.first} />
-
-            //                 <div key={item}>
-            //                     <div>{item.name.first}</div>
-            //                     <img src={item.picture.thumbnail} alt="" />
-            //                 </div>
-            //             ))} */}
-            //             {/* {items.map(item => (
-            //                 // <img src={item.picture.medium} alt={item.name.first} />
-
-            //                 <div key={item}>
-            //                     <div>{item.name.first}</div>
-            //                     <img src={item.picture.thumbnail} alt="" />
-            //                 </div>
-            //             ))} */}
