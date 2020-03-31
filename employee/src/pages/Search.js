@@ -4,9 +4,12 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
 import SearchForm from "../components/SearchForm";
+import SearchResults from "../components/SearchResults";
 // import EmployeeDetail from "../components/Table/EmployeeDetail";
 import "./style.css";
 import API from "../utils/API";
+
+
 
 class Search extends Component {
     state = {
@@ -32,29 +35,45 @@ class Search extends Component {
         this.setState({ search: event.target.value });
     };
 
-    // When the form is submitted, search the OMDB API for the value of `this.state.search`
-    //   handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     this.searchMovies(this.state.search);
-    //   };
+    
+    handleFormSubmit = event => {
+        event.preventDefault();
+        API.getRandom(this.state.search)
+            .then(res => {
+                if (res.data.status === "error") {
+                    throw new Error(res.data.message);
+                }
+                this.setState({ items: res.data.results, error: "" });
+            })
+            .catch(err => this.setState({ error: err.message }));
+    };
+
 
     render() {
+
         var { items } = this.state
+
         return (
+
             <Container>
                 <Row>
                     <Col size="md-12">
                         <Card heading="Search">
+
                             <SearchForm
-                                value={items.search}
-                                handleInputChange={this.handleInputChange}
                                 handleFormSubmit={this.handleFormSubmit}
+                                handleInputChange={this.handleInputChange}
+                                items={this.state.items}
                             />
+                        {/* <SearchResults items={this.state.results} /> */}
+                            
+                   
+
                         </Card>
                     </Col>
                     <Col size="md-12">
                         <div>
-                
+
                             {console.log(items)}
                             <table>
                                 <tr>
