@@ -4,7 +4,8 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
 import SearchForm from "../components/SearchForm";
-import MovieDetail from "../components/MovieDetail";
+// import EmployeeDetail from "../components/Table/EmployeeDetail";
+import "./style.css";
 import API from "../utils/API";
 
 class Search extends Component {
@@ -17,7 +18,7 @@ class Search extends Component {
     componentDidMount() {
         API.getRandom()
             // .then((response) => response.json())
-        
+
             .then((response) => {
                 console.log(response)
                 this.setState({
@@ -52,36 +53,70 @@ class Search extends Component {
                         </Card>
                     </Col>
                     <Col size="md-12">
-
-                        {items.map(item => (
-                            <img src={item.picture.medium} alt={item.name.first} />
-                            // <div>{item.gender}</div>
-             ))}
-
-                        <Card
-                            heading={"Employee Table"}
-                        >
-{console.log(items)}
-                            {items.length>0 ? (
-                                <MovieDetail
-                                    title={items[0].gender}
-                                      src={items[0].picture.medium} 
-                                    email={items[0].email}
-                                    phone={items[0].phone}
-                                    country={items[0].nat}
-                                />
-                            ) :
-                                (
-                                    <h3>No Results to Display</h3>
-                                )
-                            }
-                        </Card>
+                        <div>
+                            <h1>Employee Table</h1>
+                            {console.log(items)}
+                            <table>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Country</th>
+                                </tr>
+                                {items.map(item => (
+                                    <tr>
+                                        <td><img src={item.picture.thumbnail} alt="" /></td>
+                                        <td>{item.name.first + " " + item.name.last}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.phone}</td>
+                                        <td>{item.nat}</td>
+                                    </tr>
+                                ))}
+                            </table>
+                        </div>
                     </Col>
 
                 </Row>
-            </Container>
+            </Container >
         );
     }
 }
 
 export default Search;
+
+// {items.length > 0 ? (
+
+//     <EmployeeDetail
+
+//     // title={items[0].gender}
+//     // src={items[0].picture.medium}
+
+//     // name={items[0].name.first + " " + items[0].name.last}
+//     // email={items[0].email}
+//     // phone={items[0].phone}
+//     // country={items[0].nat}
+//     />
+// ) :
+//     (
+//         <h3>No Results to Display</h3>
+//     )
+
+// }
+
+            // {/* {items.map(item => (
+            //                 // <img src={item.picture.medium} alt={item.name.first} />
+
+            //                 <div key={item}>
+            //                     <div>{item.name.first}</div>
+            //                     <img src={item.picture.thumbnail} alt="" />
+            //                 </div>
+            //             ))} */}
+            //             {/* {items.map(item => (
+            //                 // <img src={item.picture.medium} alt={item.name.first} />
+
+            //                 <div key={item}>
+            //                     <div>{item.name.first}</div>
+            //                     <img src={item.picture.thumbnail} alt="" />
+            //                 </div>
+            //             ))} */}
