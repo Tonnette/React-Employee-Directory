@@ -23,7 +23,6 @@ class Search extends Component {
             // .then((response) => response.json())
 
             .then((response) => {
-                console.log(response)
                 this.setState({
                     items: response.data.results
                 })
@@ -32,28 +31,52 @@ class Search extends Component {
     }
 
     handleInputChange = event => {
-        this.setState({ search: event.target.value });
+        console.log(event);
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+
     };
 
-    
-    handleFormSubmit = event => {
-        event.preventDefault();
-        API.getRandom(this.state.search)
-            .then(res => {
-                if (res.data.status === "error") {
-                    throw new Error("error");
-                }
-                this.setState({ items: res.data.results, error: "" });
-            })
-            .catch(err => this.setState({ error: err.message }));
-    };
+
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     API.getRandom(this.state.search)
+    //         .then(res => {
+    //             console.log({ res })
+    //             if (res.data.status === "error") {
+    //                 throw new Error("error");
+    //             }
+    //             this.setState({ items: res.data.results, error: "" });
+    //         })
+    //         .catch(err => this.setState({ error: err.message }));
+    // };
+
+
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     API.getRandom(this.state.search)
+    //         .then(res => {
+    //             if (res.data.status === "error") {
+    //                 throw new Error("error");
+    //             }
+    //             this.setState({ items: res.data.results, error: "" });
+    //         })
+    //         .catch(err => this.setState({ error: err.message }));
+    // };
 
 
     render() {
+        console.log(this.state.search)
+        var { items, search } = this.state
 
-        var { items } = this.state
 
+        // const filteredNames = items.filter(name => {
         return (
+            // name.toLowerCase().includes(search.toLowerCase())
+
 
             <Container>
                 <Row>
@@ -61,20 +84,21 @@ class Search extends Component {
                         <Card heading="Search">
 
                             <SearchForm
+                                value={search}
                                 handleFormSubmit={this.handleFormSubmit}
                                 handleInputChange={this.handleInputChange}
                                 items={items}
+
+
                             />
-                        <SearchResults items={items} />
-                            
-                   
+                            <SearchResults items={items} />
+
+
 
                         </Card>
                     </Col>
                     <Col size="md-12">
                         <div>
-
-                            {console.log(items)}
                             <table>
                                 <tr>
                                     <th>Image</th>
