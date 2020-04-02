@@ -20,13 +20,4 @@ function App() {
   );
 }
 
-// export default App;
-
-
-// import OmdbContainer from "./components/OmdbContainer";
-
-// function App() {
-//   return <OmdbContainer />;
-// }
-
 export default App;
