@@ -3,6 +3,7 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
+import SearchForm from "../components/SearchForm";
 import Table from "../components/Table/Table";
 import "./style.css";
 import API from "../utils/API";
@@ -61,20 +62,12 @@ class Search extends Component {
                 <Row>
                     <Col size="md-12">
                         <Card heading="Search">
-                            <form>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        value={this.state.search}
-                                        name="search"
-                                        className="form-control"
-                                        placeholder="Filter Employees by name"
-                                        id="search"
-                                        onChange={this.updateSearch.bind(this)}
-                                    />
-                                    <br />
-                                </div>
-                            </form>
+                            <SearchForm
+                            updateSearch={this.updateSearch}
+                            value={this.state.search}
+                            >
+                            </SearchForm>
+                    
                         </Card>
                     </Col>
                     <Col size="md-12">
