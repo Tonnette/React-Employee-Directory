@@ -3,43 +3,59 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
+import Table from "../components/Table/Table";
 import "./style.css";
 import API from "../utils/API";
-
+import _ from 'lodash'
 
 
 class Search extends Component {
     state = {
         items: [],
-        search: ""
+        search: "",
+        sortState: "asc"
     };
-
 
     componentDidMount() {
         API.getRandom()
             // .then((response) => response.json())
 
-            .then((response) => {
+            .then(response => {
                 this.setState({
                     items: response.data.results
-                })
+                });
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
+    };
+
+    sort = () => {
+        this.setState({items: _.orderBy(this.state.items, (item) => {
+            return item.name.first;
+        }, this.state.sortState)})
+
+        if (this.state.sortState === "asc") {
+            this.setState({ sortState: "desc" });
+        }
+        else if (this.state.sortState === "desc") {
+            this.setState({ sortState: "asc" });
+        }
     }
 
- updateSearch = event => {
+    updateSearch = event => {
         console.log(event.target.value);
-        this.setState({search: event.target.value.substr(0,35)})
-
+        this.setState({ search: event.target.value.substr(0, 35) });
     };
     render() {
-        let filteredContacts = this.state.items.filter(
-            (contact) => {
-                return contact.name.first.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 
-                || contact.name.last.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-            }
-        )
-        var { items, search } = this.state
+        let filteredContacts = this.state.items.filter(contact => {
+            return (
+                contact.name.first
+                    .toLowerCase()
+                    .indexOf(this.state.search.toLowerCase()) !== -1 ||
+                contact.name.last
+                    .toLowerCase()
+                    .indexOf(this.state.search.toLowerCase()) !== -1
+            );
+        });
         return (
             <Container>
                 <Row>
@@ -47,7 +63,8 @@ class Search extends Component {
                         <Card heading="Search">
                             <form>
                                 <div className="form-group">
-                                    <input type="text"
+                                    <input
+                                        type="text"
                                         value={this.state.search}
                                         name="search"
                                         className="form-control"
@@ -62,31 +79,15 @@ class Search extends Component {
                     </Col>
                     <Col size="md-12">
                         <div>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Country</th>
-                                    </tr>
-                                    {filteredContacts.map(item => (
-                                        <tr>
-                                            <td><img src={item.picture.thumbnail} alt="" /></td>
-                                            <td>{item.name.first + " " + item.name.last}</td>
-                                            <td>{item.email}</td>
-                                            <td>{item.phone}</td>
-                                            <td>{item.nat}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <Table
+                                filteredContacts={filteredContacts}
+                                onNameClick={this.sort}
+                            ></Table>
+
                         </div>
                     </Col>
-
                 </Row>
-            </Container >
+            </Container>
         );
     }
 }
