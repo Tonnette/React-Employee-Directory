@@ -25,7 +25,7 @@ Filter Function
 ![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MyScreenShots/Filter.png)
 
 Sort Function
-![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MySrceenShots/Sort.png)
+![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MyScreenShots/Sort.png)
 
 # Deployed App
 https://tonnette-employee-react-app.herokuapp.com/
