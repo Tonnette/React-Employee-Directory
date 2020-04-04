@@ -19,7 +19,9 @@ The SearchForm component displays the search bar data via props to display the r
 
 
 # Screen Shots
-![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MySreenShots/Overall.png)
+![ScreenShot](hhttps://github.com/Tonnette/React-Employee-Directory/blob/master/MySreenShots/Overall.png)
+
+![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MySreenShots/Overall)
 
 Filter Function
 ![ScreenShot](https://github.com/Tonnette/React-Employee-Directory/blob/master/MySreenShots/Filter.png)
